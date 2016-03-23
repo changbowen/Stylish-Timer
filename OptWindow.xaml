@@ -3,26 +3,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Options" Height="315.73" Width="307.865" Loaded="Window_Loaded">
     <Grid>
-        <TextBlock x:Name="TB_Preview" Text="12:34:56" FontSize="48" Margin="10,31,18,138" Width="272" TextAlignment="Center" Foreground="White">
-            <TextBlock.Effect>
-                <DropShadowEffect ShadowDepth="2" BlurRadius="6"/>
-            </TextBlock.Effect>
-        </TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="10,122,0,0" TextWrapping="Wrap" Text="Font" VerticalAlignment="Top"/>
-        <ComboBox x:Name="CbB_Font" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" Margin="92,119,0,0"/>
-        <Button x:Name="Btn_OK" Content="Save &amp; Restart" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Margin="92,235,0,0" Height="32" IsDefault="True"/>
-        <Button x:Name="Btn_Cancel" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="78" Margin="204,235,0,0" Height="32" IsCancel="True"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Font Preview" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,154,0,0" TextWrapping="Wrap" Text="Font Size" VerticalAlignment="Top"/>
-        <ComboBox x:Name="CbB_FontSize" HorizontalAlignment="Left" Margin="204,151,0,0" VerticalAlignment="Top" Width="78" IsEditable="True">
+        <TextBlock HorizontalAlignment="Left" Margin="10,14,0,0" TextWrapping="Wrap" Text="Font" VerticalAlignment="Top"/>
+        <ComboBox x:Name="CbB_Font" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" Margin="92,11,0,0"/>
+        <Button x:Name="Btn_Cancel" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Margin="212,243,0,0" Height="24" IsCancel="True"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,46,0,0" TextWrapping="Wrap" Text="Font Size" VerticalAlignment="Top"/>
+        <ComboBox x:Name="CbB_FontSize" HorizontalAlignment="Left" Margin="204,43,0,0" VerticalAlignment="Top" Width="78" IsEditable="True" TextBoxBase.TextChanged="CbB_FontSize_TextChanged">
             <ComboBoxItem Content="24"/>
             <ComboBoxItem Content="36"/>
             <ComboBoxItem Content="48"/>
             <ComboBoxItem Content="72"/>
+            <ComboBoxItem Content="108"/>
             <ComboBoxItem Content="144"/>
         </ComboBox>
-        <TextBlock HorizontalAlignment="Left" Margin="10,188,0,0" TextWrapping="Wrap" Text="Countdown time (h:m:s)" VerticalAlignment="Top"/>
-        <TextBox x:Name="T_Timespan" HorizontalAlignment="Left" Margin="204,185,0,0" VerticalAlignment="Top" Width="78" Text="00:00:00" TextAlignment="Right"/>
-
+        <TextBlock HorizontalAlignment="Left" Margin="10,80,0,0" TextWrapping="Wrap" Text="Countdown time (h:m:s)" VerticalAlignment="Top"/>
+        <TextBox x:Name="T_Timespan" HorizontalAlignment="Left" Margin="204,77,0,0" VerticalAlignment="Top" Width="78" Text="00:00:00" TextAlignment="Right"/>
+        <Button x:Name="Btn_Save" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Margin="62,243,0,0" Height="24" IsDefault="True"/>
+        <Button x:Name="Btn_Restart" Content="Restart" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Margin="137,243,0,0" Height="24"/>
     </Grid>
 </Window>

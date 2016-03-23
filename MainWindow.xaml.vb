@@ -59,7 +59,6 @@
         '    .Width = .Height
         '    .Margin = New Thickness(0, Me.Height / 3, 0, 0)
         'End With
-
         UpdateDigitAry()
         For i = digits.GetUpperBound(0) To 0 Step -1
             Dim newDB As TextBlock = MainGrid.FindName("D" & i & 1)
@@ -76,16 +75,39 @@
     End Sub
 
     Friend Sub UpdateGridLayout()
-        MainGrid.Height = Double.NaN
-        MainGrid.Width = Double.NaN
+        'MainGrid.Height = Double.NaN
+        'MainGrid.Width = Double.NaN
+        For Each col In MainGrid.ColumnDefinitions
+            col.Width = GridLength.Auto
+        Next
         Me.FontFamily = New FontFamily(font)
         Me.FontSize = font_size
         MainGrid.Effect = New Effects.DropShadowEffect With {.BlurRadius = font_size / 10, .ShadowDepth = font_size / 32}
         'MainGrid.Measure(New Size(Me.Width, Me.Height))
-        MainGrid.Arrange(New Rect(New Size(1000, Me.Height)))
+        MainGrid.Arrange(New Rect(New Size(Me.Width, Me.Height)))
+        For Each col In MainGrid.ColumnDefinitions
+            col.Width = New GridLength(col.ActualWidth)
+        Next
+        'MainGrid.Height = MainGrid.ActualHeight
+        'MainGrid.Width = MainGrid.ActualWidth
+    End Sub
 
-        MainGrid.Height = MainGrid.ActualHeight
-        MainGrid.Width = MainGrid.ActualWidth
+    Friend Sub UpdateGridLayout(_font As String, _size As Double)
+        'MainGrid.Height = Double.NaN
+        'MainGrid.Width = Double.NaN
+        For Each col In MainGrid.ColumnDefinitions
+            col.Width = GridLength.Auto
+        Next
+        Me.FontFamily = New FontFamily(_font)
+        Me.FontSize = _size
+        MainGrid.Effect = New Effects.DropShadowEffect With {.BlurRadius = _size / 10, .ShadowDepth = _size / 32}
+        'MainGrid.Measure(New Size(Me.Width, Me.Height))
+        MainGrid.Arrange(New Rect(New Size(Me.Width, Me.Height)))
+        For Each col In MainGrid.ColumnDefinitions
+            col.Width = New GridLength(col.ActualWidth)
+        Next
+        'MainGrid.Height = MainGrid.ActualHeight
+        'MainGrid.Width = MainGrid.ActualWidth
     End Sub
 
     Private Sub tick(sender As Object, e As Timers.ElapsedEventArgs) Handles timer.Elapsed
@@ -105,8 +127,8 @@
                                   If digits(ii, 0).ToString <> oldDB.Text Then
                                       Dim newDB As TextBlock = MainGrid.FindName("D" & ii & SwitchValue(digits(ii, 1)))
                                       newDB.Text = digits(ii, 0)
-                                      Dim anim_movein As New Animation.DoubleAnimation(Me.ActualHeight, 0, New Duration(TimeSpan.FromSeconds(0.8))) With {.EasingFunction = ease_inout}
-                                      Dim anim_moveout As New Animation.DoubleAnimation(0, -Me.ActualHeight, New Duration(TimeSpan.FromSeconds(0.8))) With {.EasingFunction = ease_inout}
+                                      Dim anim_movein As New Animation.DoubleAnimation(MainGrid.ActualHeight, 0, New Duration(TimeSpan.FromSeconds(0.8))) With {.EasingFunction = ease_inout}
+                                      Dim anim_moveout As New Animation.DoubleAnimation(0, -MainGrid.ActualHeight, New Duration(TimeSpan.FromSeconds(0.8))) With {.EasingFunction = ease_inout}
                                       Dim anim_zoomin As New Animation.DoubleAnimation(0.5, 1, New Duration(TimeSpan.FromSeconds(0.8))) With {.EasingFunction = ease_inout}
                                       Dim anim_zoomout As New Animation.DoubleAnimation(1, 0.5, New Duration(TimeSpan.FromSeconds(0.8))) With {.EasingFunction = ease_inout}
                                       Dim tg_new As New TransformGroup
