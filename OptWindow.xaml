@@ -19,5 +19,9 @@
         <TextBox x:Name="T_Timespan" HorizontalAlignment="Left" Margin="204,77,0,0" VerticalAlignment="Top" Width="78" Text="00:00:00" TextAlignment="Right"/>
         <Button x:Name="Btn_Save" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Margin="62,243,0,0" Height="24" IsDefault="True"/>
         <Button x:Name="Btn_Restart" Content="Restart" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Margin="137,243,0,0" Height="24"/>
+        <TextBox x:Name="T_RunExe" HorizontalAlignment="Left" Margin="92,112,0,0" VerticalAlignment="Top" Width="107"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,114,0,0" TextWrapping="Wrap" Text="Run at end" VerticalAlignment="Top"/>
+        <TextBlock Foreground="Gray" HorizontalAlignment="Left" Margin="92,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190"><Run Text="Separate "/><Run Text="program path "/><Run Text="and arguments"/><Run Text=". "/><Run Text="Leave empty to do "/><Run Text="nothing."/></TextBlock>
+        <TextBox x:Name="T_RunArgs" HorizontalAlignment="Left" Margin="204,112,0,0" VerticalAlignment="Top" Width="78"/>
     </Grid>
 </Window>

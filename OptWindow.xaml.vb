@@ -8,6 +8,8 @@
         CbB_FontSize.Text = MainWindow.font_size
         CbB_Font.Text = MainWindow.font
         T_Timespan.Text = MainWindow.span_save.ToString
+        T_RunExe.Text = MainWindow.cmdline
+        T_RunArgs.Text = MainWindow.cmdline_args
 
         CbB_Font.Focus()
     End Sub
@@ -31,9 +33,12 @@
                 MainWindow.span_save = ts
             End If
         End If
+        config.Add(New XElement("CmdLine", T_RunExe.Text))
+        config.Add(New XElement("CmdLineArgs", T_RunArgs.Text))
+        MainWindow.cmdline = T_RunExe.Text
+        MainWindow.cmdline_args = T_RunArgs.Text
 
         config.Save(MainWindow.config_path)
-
         mainwin.UpdateGridLayout()
         Me.Close()
     End Sub

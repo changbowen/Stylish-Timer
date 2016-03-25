@@ -13,6 +13,8 @@ Class MainWindow
     Public Shared config_path As String = "config.xml"
     Public Shared font As String = "Georgia"
     Public Shared font_size As Double = 144
+    Public Shared cmdline As String = ""
+    Public Shared cmdline_args As String = ""
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
         Me.Visibility = Windows.Visibility.Hidden
@@ -39,6 +41,8 @@ Class MainWindow
                 span = TimeSpan.Parse(config.Element("Timespan").Value)
                 span_save = span
             End If
+            If config.Elements("CmdLine").Any Then cmdline = config.Element("CmdLine").Value
+            If config.Elements("CmdLineArgs").Any Then cmdline_args = config.Element("CmdLineArgs").Value
         End If
 
         'With SepH_M1
@@ -121,6 +125,7 @@ Class MainWindow
         span = span.Subtract(New TimeSpan(0, 0, 1))
         If span.TotalSeconds < 0 Then
             timer.Stop()
+            If cmdline <> "" Then Process.Start(cmdline, cmdline_args)
             Exit Sub
         End If
         UpdateDigitAry()
