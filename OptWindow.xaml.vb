@@ -58,14 +58,6 @@
     End Sub
 
     Private Sub Btn_Restart_Click(sender As Object, e As RoutedEventArgs) Handles Btn_Restart.Click
-        Dim ts As TimeSpan
-        If TimeSpan.TryParse(T_Timespan.Text, ts) Then
-            If ts.TotalSeconds > 0 Then
-                MainWindow.span = ts
-                If Not mainwin.timer.Enabled Then
-                    mainwin.timer.Start()
-                End If
-            End If
-        End If
+        mainwin.Restart(T_Timespan.Text)
     End Sub
 End Class

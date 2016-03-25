@@ -1,4 +1,6 @@
-﻿Class MainWindow 
+﻿Imports System.Threading
+
+Class MainWindow
     Public WithEvents timer As New Timers.Timer(1000)
     Dim digits(,) As Byte = {{9, 1}, {9, 1}, {9, 1}, {9, 1}, {9, 1}, {9, 1}}
     Dim ease_in As New Animation.CubicEase With {.EasingMode = Animation.EasingMode.EaseIn}
@@ -77,6 +79,9 @@
     Friend Sub UpdateGridLayout()
         'MainGrid.Height = Double.NaN
         'MainGrid.Width = Double.NaN
+        For Each tb As TextBlock In MainGrid.Children 'to make sure theres enough room for each digit
+            If tb.Name.StartsWith("D") Then tb.Text = "0"
+        Next
         For Each col In MainGrid.ColumnDefinitions
             col.Width = GridLength.Auto
         Next
@@ -158,6 +163,7 @@
                                       oldDB.BeginAnimation(TextBlock.OpacityProperty, anim_fadeout)
                                   End If
                               End Sub)
+            Thread.Sleep(100)
         Next
     End Sub
 
@@ -199,12 +205,35 @@
         End If
     End Sub
 
+    Friend Sub Restart(ts_str As String)
+        Dim ts As TimeSpan
+        If TimeSpan.TryParse(ts_str, ts) Then
+            If ts.TotalSeconds > 0 Then
+                span = ts
+                If Not timer.Enabled Then
+                    timer.Start()
+                End If
+            End If
+        End If
+    End Sub
+
+    Friend Sub Restart(ts As TimeSpan)
+        If ts.TotalSeconds > 0 Then
+            span = ts
+            If Not timer.Enabled Then
+                timer.Start()
+            End If
+        End If
+    End Sub
+
     Private Sub Window_PreviewKeyDown(sender As Object, e As KeyEventArgs)
         If e.Key = Key.F12 Then
             Dim optwin As New OptWindow
             optwin.Owner = Me
             optwin.ShowDialog()
             optwin.Close()
+        ElseIf e.Key = Key.F11 Then
+            Restart(span_save)
         End If
     End Sub
 End Class
