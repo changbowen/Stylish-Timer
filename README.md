@@ -1,4 +1,4 @@
-# Stylish-Timer
+# Stylish Timer
 A stylish and elegant countdown timer.
 
 # Screenshot
