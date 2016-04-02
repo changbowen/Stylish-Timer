@@ -15,6 +15,8 @@ Class MainWindow
     Public Shared font_size As Double = 144
     Public Shared cmdline As String = ""
     Public Shared cmdline_args As String = ""
+    Public Shared font_color As String = "White"
+    Public Shared font_sdcolor As String = "Black"
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
         Me.Visibility = Windows.Visibility.Hidden
@@ -41,6 +43,8 @@ Class MainWindow
                 span = TimeSpan.Parse(config.Element("Timespan").Value)
                 span_save = span
             End If
+            If config.Elements("FontColor").Any Then font_color = config.Element("FontColor").Value
+            If config.Elements("ShadowColor").Any Then font_sdcolor = config.Element("ShadowColor").Value
             If config.Elements("CmdLine").Any Then cmdline = config.Element("CmdLine").Value
             If config.Elements("CmdLineArgs").Any Then cmdline_args = config.Element("CmdLineArgs").Value
         End If
@@ -91,7 +95,8 @@ Class MainWindow
         Next
         Me.FontFamily = New FontFamily(font)
         Me.FontSize = font_size
-        MainGrid.Effect = New Effects.DropShadowEffect With {.BlurRadius = font_size / 10, .ShadowDepth = font_size / 32}
+        Me.Foreground = New SolidColorBrush(ColorConverter.ConvertFromString(font_color))
+        MainGrid.Effect = New Effects.DropShadowEffect With {.Color = ColorConverter.ConvertFromString(font_sdcolor), .BlurRadius = font_size / 10, .ShadowDepth = font_size / 32}
         'MainGrid.Measure(New Size(Me.Width, Me.Height))
         MainGrid.Arrange(New Rect(New Size(Me.Width, Me.Height)))
         For Each col In MainGrid.ColumnDefinitions
@@ -101,7 +106,7 @@ Class MainWindow
         'MainGrid.Width = MainGrid.ActualWidth
     End Sub
 
-    Friend Sub UpdateGridLayout(_font As String, _size As Double)
+    Friend Sub UpdateGridLayout(_font As String, _size As Double, _color As String, _sdcolor As String)
         'MainGrid.Height = Double.NaN
         'MainGrid.Width = Double.NaN
         For Each col In MainGrid.ColumnDefinitions
@@ -109,7 +114,8 @@ Class MainWindow
         Next
         Me.FontFamily = New FontFamily(_font)
         Me.FontSize = _size
-        MainGrid.Effect = New Effects.DropShadowEffect With {.BlurRadius = _size / 10, .ShadowDepth = _size / 32}
+        Me.Foreground = New SolidColorBrush(ColorConverter.ConvertFromString(_color))
+        MainGrid.Effect = New Effects.DropShadowEffect With {.Color = ColorConverter.ConvertFromString(_sdcolor), .BlurRadius = _size / 10, .ShadowDepth = _size / 32}
         'MainGrid.Measure(New Size(Me.Width, Me.Height))
         MainGrid.Arrange(New Rect(New Size(Me.Width, Me.Height)))
         For Each col In MainGrid.ColumnDefinitions

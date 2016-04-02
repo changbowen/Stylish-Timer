@@ -6,6 +6,7 @@ A stylish and elegant countdown timer.
 
 # Features & Updates
 - Custom fonts and size.
+- Custom font color and shadow color.
 - Option to execute custom command at the end.
 - F12 for options.
 - F11 to restart.
